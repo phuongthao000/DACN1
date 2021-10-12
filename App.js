@@ -5,12 +5,12 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import IconWeather from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import HomeScreen from "./Screens/HomeScreen";
-import SearchScreen from './Screens/SearchScreen';
-import WeatherScreen from './Screens/WeatherScreen';
-import {HistoryScreen} from './Screens/HistoryScreen';
-import camera from './Components/Camera/CaptureImages';
-import History from './Components/Home/SeeMoreHistory';
+import HomeScreen from "./src/Screens/HomeScreen";
+import SearchScreen from './src/Screens/SearchScreen';
+import WeatherScreen from './src/Screens/WeatherScreen';
+import {HistoryScreen} from './src/Screens/HistoryScreen';
+import camera from './src/Components/Camera/CaptureImages';
+import History from './src/Components/Home/SeeMoreHistory';
 
 
 
