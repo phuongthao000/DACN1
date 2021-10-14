@@ -1,19 +1,17 @@
-import React from "react";
-import { createStackNavigator } from "@react-navigation/stack";
+import React from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import IconWeather from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import HomeScreen from "./src/Screens/HomeScreen";
+import HomeScreen from './src/Screens/HomeScreen';
 import SearchScreen from './src/Screens/SearchScreen';
 import WeatherScreen from './src/Screens/WeatherScreen';
 import {HistoryScreen} from './src/Screens/HistoryScreen';
-import camera from './src/Components/Camera/CaptureImages';
+import Camera from './src/Components/Camera/CaptureImages';
 import History from './src/Components/Home/SeeMoreHistory';
-
-
-
+import Detail from './src/Components/Home/ViewDetailData';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -38,7 +36,8 @@ const Demo_App = () => {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="AnAn" component={AnAn} />
-        <Stack.Screen name = "camera" component = {camera}/>
+        <Stack.Screen name = "Camera" component = {Camera}/>
+        <Stack.Screen name = "Detail" component = {Detail}/>
         <Stack.Screen name = "History" component = {History}/>
       </Stack.Navigator>
     </NavigationContainer>

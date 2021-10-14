@@ -140,8 +140,8 @@ export default function CaptureImage(props) {
                     {/* camera trước, sau */}
                     <TouchableOpacity style={styles.btnFlip} onPress={changeType}>
                         <Image
-                        style={styles.flashIcon}
-                        source={require('../../assets/flipCamera.png')}/>
+                            style={styles.flashIcon}
+                            source={require('../../assets/flipCamera.png')}/>
                     </TouchableOpacity>
                 </View>
                 

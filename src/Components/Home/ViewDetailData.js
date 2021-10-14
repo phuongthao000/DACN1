@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet,View, Text, SafeAreaView, FlatList, ActivityIndicator,Image, Button } from 'react-native';
 
-const SeeMoreHistory = ({ navigation })=>{
+const ViewDetailData = ({ navigation,route })=>{        
     const [data,setdata] = useState([]);
     const [isLoading,setisLoading] = useState(true);
+
     console.log(data);
     useEffect(()=>{
         getListPhotos();
@@ -12,7 +13,7 @@ const SeeMoreHistory = ({ navigation })=>{
     }, [])
 
     getListPhotos = ()=>{
-        fetch("http://192.168.1.10:80/AdminReact/seemorehistory.php")
+        fetch('http://192.168.1.10/AdminReact/saubenh.php?id='+route.params.id)
         .then((res)=>res.json())
         .then((resJson)=>{setdata(resJson)})
         .catch((error)=>{console.log(error);})
@@ -22,14 +23,13 @@ const SeeMoreHistory = ({ navigation })=>{
     renderItem = ({item,index})=>{
         return(
         <View style = {styles.item}>
-            <Image  
+            <Image 
                 style = {styles.image}
                 source={{uri:item.url}}
                 resizeMode='contain'/>
             <View style={styles.wrapText}>
                 <Text style={{color:'black'}}>{item.title}</Text>
             </View>
-            <Button title="View" onPress={() => navigation.navigate("Detail",{id:item.id})}></Button>
         </View>
         )
     }
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     }
 });
 
-export default SeeMoreHistory;
+export default ViewDetailData;
 
 
 
