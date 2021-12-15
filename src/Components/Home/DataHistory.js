@@ -1,73 +1,99 @@
-import React, { useEffect, useState } from 'react';
-import {Button,TouchableOpacity,StyleSheet,View, Text, SafeAreaView, FlatList, ActivityIndicator,Image } from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {
+  Button,
+  TouchableOpacity,
+  StyleSheet,
+  View,
+  Text,
+  SafeAreaView,
+  FlatList,
+  ActivityIndicator,
+  Image,
+} from 'react-native';
 
-const Data_History = () =>{
-  const [data,setdata] = useState([]);
-  const [isLoading,setisLoading] = useState(true);
-  console.log(data);
-  useEffect(()=>{
-    getListPhotos();
-    return ()=>{
-    }
+const Data_History = () => {
+  const [data, setData] = useState([]);
+  const [isLoading, setisLoading] = useState(true);
 
-  }, [])
-
-  getListPhotos = ()=>{
-    fetch("http://192.168.1.10:80/AdminReact/historyhome.php")
-    .then((res)=>res.json())
-    .then((resJson)=>{setdata(resJson)})
-    .catch((error)=>{console.log(error);})
-    .finally(()=>setisLoading(false))
+  const getHistory5 = () => {
+    fetch('http://192.168.35.1:8080/history3')
+      .then(rs => rs.json())
+      .then(rs => {
+        console.log('Success:::', rs);
+        setData(rs);
+        setisLoading(true);
+      })
+      .catch(error => {
+        console.log(error);
+        setisLoading(false);
+      });
+    // .finally(() => setData([]));
   };
 
-  renderItem = ({item,index})=>{
-    return(
-      <View style = {styles.item}>
-        <Image 
-          style = {styles.image}
-          source={{uri:item.url}}
-          resizeMode='contain'/>
-        <View style={styles.wrapText}>
-          <Text style={{color:'black'}}>{item.title}</Text>
-        </View>
-      </View>
-    )
-  }
+  useEffect(() => {
+    setTimeout(() => {
+      getHistory5();
+      setisLoading(false);
+    }, 1000);
+  }, []);
 
-  return(
-    <FlatList 
+  const Item = ({item}) => (
+    <View style={styles.item}>
+      <Text style={styles.title}>{item.viName}</Text>
+      <View style={styles.time}>
+        <Text style={styles.subtitle}>{item.date}</Text>
+        <Text style={styles.subtitle}>{item.time}</Text>
+      </View>
+    </View>
+  );
+
+  const renderItem = ({item}) => <Item item={item} />;
+
+  return (
+    <FlatList
       style={styles.list}
-      data = {data}
+      data={data}
       renderItem={renderItem}
-      keyExtractor={item => item.id}>
-    </FlatList>
-  )}
+      keyExtractor={item => item.uid}
+    />
+  );
+};
 
 const styles = StyleSheet.create({
-  list:{
-    flex:1,
-    padding:8
+  list: {
+    flex: 1,
+    padding: 8,
   },
-  item:{
-    flexDirection:'row',
-    padding:5,
-    shadowColor:'#000',
-    shadowRadius:4,
-    shadowOpacity:0.25
+  item: {
+    backgroundColor: '#009E41',
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
+    borderRadius: 10,
   },
-  image:{
-    width:100,
-    height:150
+  title: {
+    fontSize: 24,
+    color: '#FFF',
   },
-  wrapText:{
-    flex:1,
-    marginTop:16,
-    marginLeft:8,
-    backgroundColor:'white'
-  }
+  time: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  image: {
+    width: 100,
+    height: 150,
+  },
+  wrapText: {
+    flex: 1,
+    marginTop: 16,
+    marginLeft: 8,
+    backgroundColor: 'white',
+  },
+  subtitle: {
+    fontSize: 18,
+    color: '#FFF',
+  },
 });
 
 export default Data_History;
-
-
-

@@ -1,4 +1,8 @@
 {
   "name": "DACN",
-  "displayName": "DACN"
+  "displayName": "DACN",
+  "packagerOpts": {
+		"config": "metro.config.js",
+		"sourceExts": ["js", "jsx", "svg", "ts", "tsx"]
+	}
 }
